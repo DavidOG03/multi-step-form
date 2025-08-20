@@ -1,0 +1,43 @@
+.app-footer {
+  background: $White;
+  padding: 1rem 1.15rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .btn {
+    background: $Marineblue;
+    color: $Lightgray;
+    padding: 12px 1rem;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+
+    &:hover {
+      background: darken($Marineblue, 5%);
+    }
+    &.go-back {
+      background: none;
+      color: $Coolgray;
+      &:hover {
+        background: $Lightgray;
+      }
+      &.disabled {
+        visibility: hidden;
+      }
+    }
+
+    &.next {
+      background: $Marineblue;
+      color: $Lightgray;
+      justify-self: flex-end;
+      &:hover {
+        background: darken($Marineblue, 5%);
+      }
+      &.disabled {
+        visibility: hidden;
+      }
+    }
+  }
+}
