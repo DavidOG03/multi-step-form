@@ -1,5 +1,5 @@
 .app-main {
-  height: auto;
+  height: 100%;
 }
 
 .step.step-one {
@@ -48,7 +48,7 @@
         border: 1px solid $Lightgray;
         border-radius: 3px;
         padding-left: 15px;
-        color: $Coolgray;
+        color: $Marineblue;
         &::placeholder {
           font-family: $fontFamily;
           font-weight: weight(bolder);
@@ -238,7 +238,6 @@
           content: "";
           width: 0.55rem;
           height: 6px;
-          border-radius: 50%;
           border: 2px solid transparent;
           border-left: 2px solid $Alabaster;
           border-bottom: 2px solid $Alabaster;
@@ -450,40 +449,106 @@
 @media (min-width: 768px) {
   .app {
     display: grid;
-    grid-template-areas: "sidebar main";
+    grid-template-areas:
+      "sidebar main"
+      "sidebar footer";
+    grid-template-columns: 275px 1fr;
+    grid-template-rows: 1fr auto;
     gap: 2rem;
-    padding: 2rem;
-    max-width: 1200px;
+    padding: 1rem;
+    max-width: 940px;
     margin: 0 auto;
+    background-color: $White;
+    height: 600px;
+    border-radius: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 1rem 10px rgba(0, 0, 0, 0.05);
 
     .app-header {
       background: url(/images/bg-sidebar-desktop.svg);
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
-      height: 100vh;
+      height: 100%;
       width: 100%;
+      max-width: 275px;
       display: flex;
       justify-content: center;
       align-items: center;
       grid-area: sidebar;
+      border-radius: 0.5rem;
 
       .step-indicators {
-        margin-top: 0;
-        position: absolute;
-        top: 20px;
-        left: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
       }
     }
 
-    .step {
-      position: static;
-      top: 0;
-      left: 0;
-      transform: none;
+    .step,
+    .thank-you {
+      position: relative;
+      top: unset;
+      // left: 50%;
+      // transform: translate(-50%, -50%);
       width: 100%;
-      max-width: 400px;
       grid-area: main;
+      box-shadow: unset;
+      padding: 2.5rem 4.25rem;
+      h1 {
+        font-size: 2rem;
+        padding-bottom: 0.75rem;
+      }
+
+      p {
+        font-size: 1rem;
+        letter-spacing: -0.2px;
+        color: $Coolgray;
+        line-height: 1.5;
+        padding-bottom: 2.25rem;
+      }
+    }
+
+    .step.step-one {
+      fieldset {
+        border: none;
+        label {
+          display: block;
+          padding-bottom: 13px;
+          span {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: weight(medium);
+            letter-spacing: -0.4px;
+            color: $Marineblue;
+          }
+
+          input {
+            width: 100%;
+            font-size: 1rem;
+            padding: 14px 8px;
+            border: 1px solid $Lightgray;
+            border-radius: 3px;
+            padding-left: 15px;
+            color: $Coolgray;
+            margin-bottom: 0.4rem;
+            &::placeholder {
+              font-family: $fontFamily;
+              font-weight: weight(bolder);
+              color: $Coolgray;
+            }
+            &:focus {
+              outline: none;
+              border-color: $Marineblue;
+            }
+          }
+        }
+      }
     }
   }
 }
