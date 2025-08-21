@@ -35,6 +35,12 @@ const App = () => {
   const [isYearly, setIsYearly] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("arcade");
   const [isAddOn, setIsAddOn] = useState([]);
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    telephone: "",
+  });
+  const [isError, setError] = useState([" ", " ", " "]);
 
   const handleGoBack = () => {
     setStep((prevStep) => Math.max(prevStep - 1, 1));
@@ -44,38 +50,93 @@ const App = () => {
     setStep((prevStep) => Math.min(prevStep + 1, 5));
   };
 
+  const handleInputChange = (e) => {
+    if (formData.username === "") {
+      setError((prev) => {
+        const newErrors = [...prev];
+        newErrors[0] = "Username is required";
+        return newErrors;
+      });
+    }
+    if (formData.email === "") {
+      setError((prev) => {
+        const newErrors = [...prev];
+        newErrors[1] = "Email is required";
+        return newErrors;
+      });
+    }
+    if (formData.telephone === "") {
+      setError((prev) => {
+        const newErrors = [...prev];
+        newErrors[2] = "Telephone is required";
+        return newErrors;
+      });
+    }
+  };
+
   return (
     <div className="app">
       <header className="app-header">
         <div className="step-indicators">
-          <button
-            onClick={() => setStep(1)}
-            className={`step-indicator ${step === 1 ? "active" : ""}`}
-          >
-            1
-          </button>
-          <button
-            onClick={() => setStep(2)}
-            className={`step-indicator ${step === 2 ? "active" : ""}`}
-          >
-            2
-          </button>
-          <button
-            onClick={() => setStep(3)}
-            className={`step-indicator ${step === 3 ? "active" : ""}`}
-          >
-            3
-          </button>
-          <button
-            onClick={() => setStep(4)}
-            className={`step-indicator ${step >= 4 ? "active" : ""}`}
-          >
-            4
-          </button>
+          <div className="step-indicator">
+            <button
+              onClick={() => setStep(1)}
+              className={`step-indicator-btn ${step === 1 ? "active" : ""}`}
+            >
+              1
+            </button>
+            <div className="step-indicator-label ">
+              <span>Step 1</span>
+              <span>Your Info</span>
+            </div>
+          </div>
+          <div className="step-indicator">
+            <button
+              onClick={() => setStep(2)}
+              className={`step-indicator-btn ${step === 2 ? "active" : ""}`}
+            >
+              2
+            </button>
+            <div className="step-indicator-label ">
+              <span>Step 2</span>
+              <span>Select Plan</span>
+            </div>
+          </div>
+          <div className="step-indicator">
+            <button
+              onClick={() => setStep(3)}
+              className={`step-indicator-btn ${step === 3 ? "active" : ""}`}
+            >
+              3
+            </button>
+            <div className="step-indicator-label">
+              <span>Step 3</span>
+              <span>Add-Ons</span>
+            </div>
+          </div>
+          <div className="step-indicator">
+            <button
+              onClick={() => setStep(4)}
+              className={`step-indicator-btn ${step >= 4 ? "active" : ""}`}
+            >
+              4
+            </button>
+            <div className="step-indicator-label ">
+              <span>Step 4</span>
+              <span>Summary</span>
+            </div>
+          </div>
         </div>
       </header>
       <main className="app-main">
-        {step === 1 && <StepOne />}
+        {step === 1 && (
+          <StepOne
+            isError={isError}
+            setError={setError}
+            handleInputChange={(e) => handleInputChange}
+            formData={formData}
+          />
+        )}
         {step === 2 && (
           <StepTwo
             yearly={isYearly}
@@ -103,6 +164,7 @@ const App = () => {
         )}
         {step === 5 && <ThankYou />}
       </main>
+
       {step !== 5 && (
         <footer className="app-footer">
           <button

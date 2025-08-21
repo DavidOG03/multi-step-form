@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "../sass/main.scss";
 
-function StepOne() {
+function StepOne({ isError, setError, handleInputChange, formData }) {
   return (
     <div className="step step-one">
       <h1 className="step-title">Personal info</h1>
@@ -10,30 +10,50 @@ function StepOne() {
       </p>
       <fieldset className="step-fieldset">
         <label htmlFor="name">
-          <span>Name</span>
+          <div className="input-header">
+            <span>Name</span>
+            {isError[0] && <span>{isError[0]}</span>}
+          </div>
           <input
             type="text"
             placeholder="e.g. Stephen King"
             id="name"
+            name="username"
+            value={formData.username}
             required
+            onChange={handleInputChange}
           />
         </label>
         <label htmlFor="email">
-          <span>Email Address</span>
+          <div className="input-header">
+            <span>Email Address</span>
+            {isError[1] && <span>{isError[1]}</span>}
+          </div>
+
           <input
             type="email"
             id="email"
+            name="email"
+            value={formData.email}
             required
             placeholder="e.g. stephenking@lorem.com"
+            onChange={handleInputChange}
           />
         </label>
         <label htmlFor="phone">
-          <span>Phone Number</span>
+          <div className="input-header">
+            <span>Phone Number</span>
+            {isError[2] && <span>{isError[2]}</span>}
+          </div>
+
           <input
             type="tel"
             id="tel"
+            name="tel"
+            value={formData.telephone}
             placeholder="e.g. +1 234 567 890"
             required
+            onChange={handleInputChange}
           />
         </label>
       </fieldset>

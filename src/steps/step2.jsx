@@ -54,13 +54,13 @@ function StepTwo({ yearly, setIsYearly, selectedPlan, setSelectedPlan }) {
         <span className={`toggle-label ${!yearly ? "active" : ""}`}>
           Monthly
         </span>
-        <div className="toggle">
-          <div
-            className={`toggle-indicator ${yearly ? "active" : ""}`}
-            onClick={() => {
-              setIsYearly(!yearly);
-            }}
-          ></div>
+        <div
+          className="toggle"
+          onClick={() => {
+            setIsYearly(!yearly);
+          }}
+        >
+          <div className={`toggle-indicator ${yearly ? "active" : ""}`}></div>
         </div>
         <span className={`toggle-label ${yearly ? "active" : ""}`}>Yearly</span>
       </div>

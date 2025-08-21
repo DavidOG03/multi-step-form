@@ -47,8 +47,12 @@
   }
 }
 
-// @media (min-width: 768px) {
-//   .app-footer {
-//     display: none;
-//   }
-// }
+@media (min-width: 768px) {
+  .app-footer {
+    padding: 1rem 5.25rem;
+    .btn {
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+    }
+  }
+}
