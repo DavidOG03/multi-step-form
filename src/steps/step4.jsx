@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const StepFour = ({ addOns, yearly, selectedPlan, isAddOn, setStep }) => {
   const planPrices = {
@@ -9,28 +10,50 @@ const StepFour = ({ addOns, yearly, selectedPlan, isAddOn, setStep }) => {
 
   const selectedAddOns = addOns.filter((addon) => isAddOn.includes(addon.key));
 
-  // Helper to extract number from price string
+  // to extract number from price string
   const getPriceValue = (priceStr) => {
-    // Matches numbers in the string (e.g., "$90/yr" -> 90)
+    // to match numbers in the string
     const match = priceStr.match(/\d+/);
     return match ? parseInt(match[0], 10) : 0;
   };
 
-  // Get plan price
+  // to get plan price
   const planPrice = getPriceValue(planPrices[selectedPlan]);
 
-  // Get total add-ons price
+  // to get total add-ons price
   const addOnsTotal = selectedAddOns.reduce(
     (acc, addOn) =>
       acc + getPriceValue(yearly ? addOn.priceYearly : addOn.priceMonthly),
     0
   );
 
-  // Calculate total
+  // to calculate total
   const total = planPrice + addOnsTotal;
 
+  const initial = {
+    opacity: 0,
+    scale: 0.8,
+    transform: "translateX(-50%), translateY(-50%)",
+  };
+  const animate = {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.75,
+      ease: "easeInOut",
+      type: "spring",
+      stiffness: 100,
+      // damping: 30,
+      // delay: child * 0.1,
+    },
+  };
+
   return (
-    <div className="step step-four">
+    <motion.div
+      className="step step-four"
+      initial={initial}
+      whileInView={animate}
+    >
       <h1 className="step-title">Finishing Up</h1>
       <p className="step-description">
         Double-check everything looks OK before confirming.
@@ -69,7 +92,7 @@ const StepFour = ({ addOns, yearly, selectedPlan, isAddOn, setStep }) => {
           {yearly ? `$${total}/yr` : `$${total}/mo`}
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

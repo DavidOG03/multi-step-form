@@ -1,8 +1,26 @@
 import React, { useState } from "react";
 import "../sass/main.scss";
+import { motion } from "framer-motion";
 
 function StepThree({ addOns, yearly, isAddOn, setIsAddOn }) {
   // const [isAddOn, setIsActive] = useState([]);
+  const initial = {
+    opacity: 0,
+    scale: 0.8,
+    transform: "translateX(-50%), translateY(-50%)",
+  };
+  const animate = {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.75,
+      ease: "easeInOut",
+      type: "spring",
+      stiffness: 100,
+      // damping: 30,
+      // delay: child * 0.1,
+    },
+  };
 
   const toggleAddOn = (addOn) => {
     setIsAddOn((prev) =>
@@ -13,7 +31,11 @@ function StepThree({ addOns, yearly, isAddOn, setIsAddOn }) {
   };
 
   return (
-    <div className="step step-three">
+    <motion.div
+      className="step step-three"
+      initial={initial}
+      whileInView={animate}
+    >
       <h1 className="step-title">Pick Add-Ons</h1>
       <p className="step-description">
         Add-Ons help enhance your gaming experience
@@ -50,7 +72,7 @@ function StepThree({ addOns, yearly, isAddOn, setIsAddOn }) {
           </button>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

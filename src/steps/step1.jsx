@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../sass/main.scss";
-
+import { motion } from "framer-motion";
 function StepOne({
   isError,
   setError,
@@ -9,8 +9,30 @@ function StepOne({
   setStep,
   handleNextStep,
 }) {
+  const initial = {
+    opacity: 0,
+    scale: 0.8,
+    transform: "translateX(-50%), translateY(-50%)",
+  };
+  const animate = {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.75,
+      ease: "easeInOut",
+      type: "spring",
+      stiffness: 100,
+      // damping: 30,
+      // delay: child * 0.1,
+    },
+  };
   return (
-    <form className="step step-one" onSubmit={handleNextStep}>
+    <motion.form
+      className="step step-one"
+      onSubmit={handleNextStep}
+      initial={initial}
+      whileInView={animate}
+    >
       <h1 className="step-title">Personal info</h1>
       <p className="step-description">
         Please provide your name, email address, and phone number.
@@ -65,7 +87,7 @@ function StepOne({
           />
         </label>
       </fieldset>
-    </form>
+    </motion.form>
   );
 }
 

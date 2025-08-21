@@ -1,9 +1,31 @@
 import React, { useState } from "react";
 import "../sass/main.scss";
+import { motion } from "framer-motion";
 
 function StepTwo({ yearly, setIsYearly, selectedPlan, setSelectedPlan }) {
+  const initial = {
+    opacity: 0,
+    scale: 0.8,
+    transform: "translateX(-50%), translateY(-50%)",
+  };
+  const animate = {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.75,
+      ease: "easeInOut",
+      type: "spring",
+      stiffness: 100,
+      // damping: 30,
+      // delay: child * 0.1,
+    },
+  };
   return (
-    <div className="step step-two">
+    <motion.div
+      className="step step-two"
+      initial={initial}
+      whileInView={animate}
+    >
       <h1 className="step-title">Select your plan</h1>
       <p className="step-description">
         You have the option of monthly or yearly billing.
@@ -64,7 +86,7 @@ function StepTwo({ yearly, setIsYearly, selectedPlan, setSelectedPlan }) {
         </div>
         <span className={`toggle-label ${yearly ? "active" : ""}`}>Yearly</span>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

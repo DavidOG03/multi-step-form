@@ -5,6 +5,7 @@ import StepTwo from "./steps/step2";
 import StepThree from "./steps/step3";
 import StepFour from "./steps/step4";
 import ThankYou from "./steps/thankYou";
+import { motion } from "framer-motion";
 
 const addOns = [
   {
@@ -48,7 +49,7 @@ const App = () => {
 
   const handleNextStep = (e) => {
     e.preventDefault();
-    if (validateForm()) {
+    if (validateForm() && step < 5) {
       setStep((prevStep) => Math.min(prevStep + 1, 5));
     }
   };
@@ -88,10 +89,32 @@ const App = () => {
     });
   };
 
+  const initial = {
+    opacity: 0,
+    scale: 0.8,
+    transform: "translateX(-50%), translateY(-50%)",
+  };
+  const animate = {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 1,
+      ease: "easeInOut",
+      type: "spring",
+      stiffness: 100,
+      // damping: 30,
+      delay: step * 0.25,
+    },
+  };
+
   return (
     <div className="app">
       <header className="app-header">
-        <div className="step-indicators">
+        <motion.div
+          className="step-indicators"
+          initial={initial}
+          animate={animate}
+        >
           <div className="step-indicator">
             <button
               onClick={() => setStep(1)}
@@ -106,7 +129,7 @@ const App = () => {
           </div>
           <div className="step-indicator">
             <button
-              onClick={() => setStep(2)}
+              onClick={() => (validateForm() ? setStep(2) : null)}
               className={`step-indicator-btn ${step === 2 ? "active" : ""}`}
             >
               2
@@ -118,7 +141,7 @@ const App = () => {
           </div>
           <div className="step-indicator">
             <button
-              onClick={() => setStep(3)}
+              onClick={() => (validateForm() ? setStep(3) : null)}
               className={`step-indicator-btn ${step === 3 ? "active" : ""}`}
             >
               3
@@ -130,7 +153,7 @@ const App = () => {
           </div>
           <div className="step-indicator">
             <button
-              onClick={() => setStep(4)}
+              onClick={() => (validateForm() ? setStep(4) : null)}
               className={`step-indicator-btn ${step >= 4 ? "active" : ""}`}
             >
               4
@@ -140,7 +163,7 @@ const App = () => {
               <p>Summary</p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </header>
       <main className="app-main">
         {step === 1 && (
