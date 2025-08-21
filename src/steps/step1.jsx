@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import "../sass/main.scss";
 
-function StepOne({ isError, setError, handleInputChange, formData }) {
+function StepOne({
+  isError,
+  setError,
+  handleInputChange,
+  formData,
+  setStep,
+  handleNextStep,
+}) {
   return (
-    <div className="step step-one">
+    <form className="step step-one" onSubmit={handleNextStep}>
       <h1 className="step-title">Personal info</h1>
       <p className="step-description">
         Please provide your name, email address, and phone number.
@@ -22,6 +29,7 @@ function StepOne({ isError, setError, handleInputChange, formData }) {
             value={formData.username}
             required
             onChange={handleInputChange}
+            className={`input ${isError[0] ? "error" : ""}`}
           />
         </label>
         <label htmlFor="email">
@@ -29,7 +37,6 @@ function StepOne({ isError, setError, handleInputChange, formData }) {
             <span>Email Address</span>
             {isError[1] && <span>{isError[1]}</span>}
           </div>
-
           <input
             type="email"
             id="email"
@@ -38,6 +45,7 @@ function StepOne({ isError, setError, handleInputChange, formData }) {
             required
             placeholder="e.g. stephenking@lorem.com"
             onChange={handleInputChange}
+            className={`input ${isError[1] ? "error" : ""}`}
           />
         </label>
         <label htmlFor="phone">
@@ -45,19 +53,19 @@ function StepOne({ isError, setError, handleInputChange, formData }) {
             <span>Phone Number</span>
             {isError[2] && <span>{isError[2]}</span>}
           </div>
-
           <input
             type="tel"
             id="tel"
-            name="tel"
+            name="telephone"
             value={formData.telephone}
             placeholder="e.g. +1 234 567 890"
             required
             onChange={handleInputChange}
+            className={`input ${isError[2] ? "error" : ""}`}
           />
         </label>
       </fieldset>
-    </div>
+    </form>
   );
 }
 

@@ -20,10 +20,11 @@
       background: darken($Marineblue, 5%);
     }
     &.go-back {
+      padding: 12px 0;
       background: none;
       color: $Coolgray;
       &:hover {
-        background: $Lightgray;
+        color: $Marineblue;
       }
       &.disabled {
         visibility: hidden;
@@ -40,7 +41,7 @@
       &.confirm {
         background: $Purplishblue;
         &:hover {
-          background: darken($Purplishblue, 5%);
+          background: lighten($Purplishblue, 10%);
         }
       }
     }
@@ -49,7 +50,7 @@
 
 @media (min-width: 768px) {
   .app-footer {
-    padding: 1rem 5.25rem;
+    padding: 1rem 5rem;
     .btn {
       padding: 1rem 1.5rem;
       font-size: 1rem;

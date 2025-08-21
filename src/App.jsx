@@ -40,38 +40,52 @@ const App = () => {
     email: "",
     telephone: "",
   });
-  const [isError, setError] = useState([" ", " ", " "]);
+  const [isError, setError] = useState(["", "", ""]);
 
   const handleGoBack = () => {
     setStep((prevStep) => Math.max(prevStep - 1, 1));
   };
 
-  const handleNextStep = () => {
-    setStep((prevStep) => Math.min(prevStep + 1, 5));
+  const handleNextStep = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      setStep((prevStep) => Math.min(prevStep + 1, 5));
+    }
+  };
+
+  // Validation function
+  const validateForm = () => {
+    const errors = [];
+    if (!formData.username.trim()) {
+      errors[0] = "Name is required";
+    }
+    if (!formData.email.trim()) {
+      errors[1] = "Email is required";
+    }
+    if (!formData.telephone.trim()) {
+      errors[2] = "Phone number is required";
+    }
+    setError(errors);
+    return errors.length === 0 || errors.every((e) => !e);
   };
 
   const handleInputChange = (e) => {
-    if (formData.username === "") {
-      setError((prev) => {
-        const newErrors = [...prev];
-        newErrors[0] = "Username is required";
-        return newErrors;
-      });
-    }
-    if (formData.email === "") {
-      setError((prev) => {
-        const newErrors = [...prev];
-        newErrors[1] = "Email is required";
-        return newErrors;
-      });
-    }
-    if (formData.telephone === "") {
-      setError((prev) => {
-        const newErrors = [...prev];
-        newErrors[2] = "Telephone is required";
-        return newErrors;
-      });
-    }
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+    setError((prevErrors) => {
+      // Update the specific error for the field being changed
+      const newErrors = [...prevErrors];
+      if (value.trim()) {
+        if (name === "username") newErrors[0] = "";
+        if (name === "email") newErrors[1] = "";
+        if (name === "telephone") newErrors[2] = "";
+      }
+      return newErrors;
+    });
   };
 
   return (
@@ -87,7 +101,7 @@ const App = () => {
             </button>
             <div className="step-indicator-label ">
               <span>Step 1</span>
-              <span>Your Info</span>
+              <p>Your Info</p>
             </div>
           </div>
           <div className="step-indicator">
@@ -99,7 +113,7 @@ const App = () => {
             </button>
             <div className="step-indicator-label ">
               <span>Step 2</span>
-              <span>Select Plan</span>
+              <p>Select Plan</p>
             </div>
           </div>
           <div className="step-indicator">
@@ -111,7 +125,7 @@ const App = () => {
             </button>
             <div className="step-indicator-label">
               <span>Step 3</span>
-              <span>Add-Ons</span>
+              <p>Add-Ons</p>
             </div>
           </div>
           <div className="step-indicator">
@@ -123,7 +137,7 @@ const App = () => {
             </button>
             <div className="step-indicator-label ">
               <span>Step 4</span>
-              <span>Summary</span>
+              <p>Summary</p>
             </div>
           </div>
         </div>
@@ -133,8 +147,9 @@ const App = () => {
           <StepOne
             isError={isError}
             setError={setError}
-            handleInputChange={(e) => handleInputChange}
+            handleInputChange={handleInputChange}
             formData={formData}
+            handleNextStep={handleNextStep}
           />
         )}
         {step === 2 && (

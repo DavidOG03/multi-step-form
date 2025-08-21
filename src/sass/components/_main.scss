@@ -32,16 +32,31 @@
     label {
       display: block;
       padding-bottom: 13px;
-      span {
-        font-size: 13px;
-        display: block;
-        margin-bottom: 0.4rem;
-        font-weight: weight(medium);
-        letter-spacing: -0.4px;
-        color: $Marineblue;
+
+      .input-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span:nth-child(1) {
+          font-size: 14px;
+          display: block;
+          margin-bottom: 0.75rem;
+          font-weight: weight(medium);
+          letter-spacing: -0.4px;
+          color: $Marineblue;
+        }
+        span:nth-child(2) {
+          font-size: 13px;
+          display: block;
+          margin-bottom: 0.4rem;
+          font-weight: weight(medium);
+          letter-spacing: -0.4px;
+          color: $Strawberryred;
+        }
       }
 
-      input {
+      .input {
         width: 100%;
         font-size: 14px;
         padding: 11px 8px;
@@ -57,6 +72,10 @@
         &:focus {
           outline: none;
           border-color: $Marineblue;
+        }
+
+        &.error {
+          border-color: $Strawberryred;
         }
       }
     }
@@ -106,10 +125,16 @@
       border: 1px solid $Lightgray;
       border-radius: 0.5rem;
       width: 100%;
+      transition: background 0.2s ease, border 0.2s ease;
 
       &.active {
         background: $Alabaster;
-        border-color: $Marineblue;
+        border: 1px solid $Marineblue;
+      }
+
+      &:hover {
+        border: 1px solid $Marineblue;
+        cursor: pointer;
       }
 
       .plan-details {
@@ -227,6 +252,10 @@
       &.active {
         background: $Alabaster;
         border-color: $Marineblue;
+      }
+      &:hover {
+        border-color: $Marineblue;
+        cursor: pointer;
       }
 
       label {
@@ -351,6 +380,10 @@
             color: $Coolgray;
             text-align: right;
             text-decoration: underline;
+            cursor: pointer;
+            &:hover {
+              color: $Purplishblue;
+            }
           }
         }
       }
@@ -446,7 +479,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .app {
     display: grid;
     grid-template-areas:
@@ -467,6 +500,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 1rem 10px rgba(0, 0, 0, 0.05);
+
+    // &-main {
+    //   display: grid;
+    //   place-items: center;
+    // }
 
     .step,
     .thank-you {
@@ -527,6 +565,300 @@
             }
           }
         }
+      }
+    }
+
+    .step.step-two {
+      .plans {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: start;
+        gap: 0.85rem;
+        margin-bottom: 1.75rem;
+
+        .plan {
+          padding: 1rem 0.7rem 0.75rem 0.7rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: start;
+          gap: 2.5rem;
+
+          .plan-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            .plan-name {
+              font-size: 1.125rem;
+              color: $Marineblue;
+              margin-bottom: 0.5rem;
+              font-weight: weight(bolder);
+            }
+            .price {
+              font-weight: weight(medium);
+              color: $Coolgray;
+              margin-bottom: 0.5rem;
+            }
+            .free-months {
+              font-weight: weight(medium);
+              color: $Marineblue;
+            }
+          }
+        }
+      }
+
+      .toggle-plan {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        background: $Alabaster;
+        border-radius: 10px;
+        width: 100%;
+        padding: 0.75rem 1rem;
+
+        span {
+          font-weight: weight(bolder);
+          color: $Coolgray;
+          &.active {
+            color: $Marineblue;
+          }
+        }
+
+        .toggle {
+          width: 40px;
+          height: 20px;
+          background: $Marineblue;
+          border-radius: 10px;
+          position: relative;
+          cursor: pointer;
+
+          .toggle-indicator {
+            width: 12px;
+            height: 12px;
+            background: $White;
+            border-radius: 50%;
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            transition: transform 0.2s ease;
+
+            &.active {
+              transform: translateX(20px);
+            }
+          }
+        }
+      }
+    }
+
+    .step.step-three {
+      .add-ons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        gap: 1.125rem;
+        margin-bottom: 1rem;
+
+        .add-on {
+          padding: 1.25rem 1.45rem;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 1.5rem;
+          background: transparent;
+          border: 1px solid $Lightgray;
+          border-radius: 0.35rem;
+          width: 100%;
+          max-width: 455px;
+
+          &.active {
+            background: $Alabaster;
+            border-color: $Marineblue;
+          }
+          &:hover {
+            border-color: $Marineblue;
+            cursor: pointer;
+          }
+
+          label {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 0.25rem;
+            border: 1px solid $Lightgray;
+            position: relative;
+            &:before {
+              content: "";
+              width: 0.55rem;
+              height: 6px;
+              border-left: 2px solid $Alabaster;
+              border-bottom: 2px solid $Alabaster;
+              position: absolute;
+              top: 45%;
+              left: 50%;
+              transform: translate(-50%, -65%) rotate(-45deg);
+              opacity: 0;
+              transition: opacity 0.2s ease;
+            }
+            &.active {
+              border-color: $Purplishblue;
+              background: $Purplishblue;
+
+              &:before {
+                opacity: 1;
+              }
+            }
+          }
+
+          input[type="checkbox"] {
+            -webkit-appearance: none;
+
+            &:checked + .add-on-details {
+              color: $Marineblue;
+              border-color: $Marineblue;
+            }
+          }
+
+          &-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            .add-on-name {
+              font-size: 1rem;
+              color: $Marineblue;
+              margin-bottom: 0.25rem;
+              font-weight: weight(bolder);
+            }
+            .add-on-description {
+              font-weight: weight(medium);
+              color: $Coolgray;
+              text-align: left;
+            }
+          }
+          .add-on-price {
+            font-weight: weight(medium);
+            color: $Purplishblue;
+            margin-left: auto;
+          }
+        }
+      }
+    }
+
+    .step.step-four {
+      .summary {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        background: $Alabaster;
+        padding: 0.75rem 1.75rem;
+        border-radius: 0.5rem;
+        max-width: 455px;
+        &-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+          padding: 0.5rem 0;
+          width: 100%;
+          border-bottom: 1px solid $Lightgray;
+
+          .plan-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+            gap: 0.25rem;
+            span {
+              display: block;
+              &:first-child {
+                font-weight: weight(bolder);
+                color: $Marineblue;
+              }
+              &:last-child {
+                font-weight: weight(medium);
+                color: $Coolgray;
+                text-align: right;
+                text-decoration: underline;
+                cursor: pointer;
+                &:hover {
+                  color: $Purplishblue;
+                }
+              }
+            }
+          }
+
+          .plan-price {
+            font-weight: weight(bolder);
+            color: $Marineblue;
+            text-align: right;
+            margin-left: auto;
+          }
+        }
+
+        .plan-add-ons {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          gap: 0.5rem;
+          width: 100%;
+          padding: 1rem 0;
+          color: $Coolgray;
+
+          .plan-add-on {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 0.5rem 0;
+          }
+
+          .plan-add-on-name {
+            font-weight: weight(regular);
+            color: $Coolgray;
+          }
+
+          .plan-add-on-price {
+            font-weight: weight(medium);
+            color: $Marineblue;
+            margin-left: auto;
+          }
+        }
+      }
+
+      .total {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0 2rem;
+
+        .total-label {
+          font-weight: weight(bolder);
+          color: $Coolgray;
+        }
+
+        .total-price {
+          font-weight: weight(bolder);
+          color: $Purplishblue;
+          font-size: 1.25rem;
+        }
+      }
+    }
+
+    .thank-you {
+      width: 100%;
+      max-width: 600px;
+      margin: auto;
+      padding: 4rem 1.5rem 4rem 1.5rem;
+
+      img {
+        margin-bottom: 1rem;
       }
     }
   }

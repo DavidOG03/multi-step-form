@@ -41,13 +41,13 @@
       }
 
       .step-indicator-label {
-        span:nth-child(1) {
+        span {
           text-transform: uppercase;
           color: $Coolgray;
           font-family: $fontFamily;
           font-size: 0.825rem;
         }
-        span:nth-child(2) {
+        p {
           display: block;
           color: $White;
           text-transform: uppercase;
