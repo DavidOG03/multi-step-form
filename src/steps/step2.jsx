@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import "../sass/main.scss";
 
-function StepTwo({ yearly, setIsYearly }) {
-  const [isActive, setIsActive] = useState("arcade");
-
+function StepTwo({ yearly, setIsYearly, selectedPlan, setSelectedPlan }) {
   return (
     <div className="step step-two">
       <h1 className="step-title">Select your plan</h1>
@@ -13,9 +11,9 @@ function StepTwo({ yearly, setIsYearly }) {
       <div className="plans">
         <button
           className={`plan monthly-button ${
-            isActive === "arcade" ? "active" : ""
+            selectedPlan === "arcade" ? "active" : ""
           }`}
-          onClick={() => setIsActive("arcade")}
+          onClick={() => setSelectedPlan("arcade")}
         >
           <img src="/images/icon-arcade.svg" alt="Arcade Icon" />
           <div className="plan-details">
@@ -26,9 +24,9 @@ function StepTwo({ yearly, setIsYearly }) {
         </button>
         <button
           className={`plan yearly-button ${
-            isActive === "advanced" ? "active" : ""
+            selectedPlan === "advanced" ? "active" : ""
           }`}
-          onClick={() => setIsActive("advanced")}
+          onClick={() => setSelectedPlan("advanced")}
         >
           <img src="/images/icon-advanced.svg" alt="Advanced Icon" />
           <div className="plan-details">
@@ -39,8 +37,10 @@ function StepTwo({ yearly, setIsYearly }) {
         </button>
 
         <button
-          className={`plan pro-button ${isActive === "pro" ? "active" : ""}`}
-          onClick={() => setIsActive("pro")}
+          className={`plan pro-button ${
+            selectedPlan === "pro" ? "active" : ""
+          }`}
+          onClick={() => setSelectedPlan("pro")}
         >
           <img src="/images/icon-pro.svg" alt="Pro Icon" />
           <div className="plan-details">

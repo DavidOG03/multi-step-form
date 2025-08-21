@@ -1,6 +1,7 @@
 .app-footer {
   background: $White;
   padding: 1rem 1.15rem;
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,8 +36,11 @@
       &:hover {
         background: darken($Marineblue, 5%);
       }
-      &.disabled {
-        visibility: hidden;
+      &.confirm {
+        background: $Purplishblue;
+        &:hover {
+          background: darken($Purplishblue, 5%);
+        }
       }
     }
   }

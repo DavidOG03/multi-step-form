@@ -1,3 +1,7 @@
+.app-main {
+  height: auto;
+}
+
 .step.step-one {
   background: $White;
   width: 343px;
@@ -292,7 +296,7 @@
 .step.step-four {
   background: $White;
   width: 343px;
-  padding: 2rem 1.4rem 1.5rem 1.4rem;
+  padding: 2rem 1.5rem 1.5rem 1.4rem;
   border-radius: 10px;
   position: relative;
   top: -70px;
@@ -362,11 +366,21 @@
 
     .plan-add-ons {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
       gap: 0.5rem;
       width: 100%;
       padding: 1rem 0;
+      color: $Coolgray;
+
+      .plan-add-on {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0.5rem 0;
+      }
 
       .plan-add-on-name {
         font-weight: weight(regular);
@@ -379,6 +393,57 @@
         margin-left: auto;
       }
     }
+  }
+
+  .total {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1rem;
+
+    .total-label {
+      font-weight: weight(bolder);
+      color: $Coolgray;
+    }
+
+    .total-price {
+      font-weight: weight(bolder);
+      color: $Purplishblue;
+    }
+  }
+}
+
+.thank-you {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: $White;
+  width: 343px;
+  padding: 4rem 1.5rem 4rem 1.5rem;
+  border-radius: 10px;
+  position: relative;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 1rem 10px rgba(0, 0, 0, 0.05);
+
+  img {
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    color: $Marineblue;
+    padding-bottom: 0.5rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: $Coolgray;
+    line-height: 1.5;
   }
 }
 

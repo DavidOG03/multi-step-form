@@ -1,35 +1,11 @@
 import React, { useState } from "react";
 import "../sass/main.scss";
 
-const addOns = [
-  {
-    key: "online",
-    name: "Online Services",
-    description: "Access to multiplayer games",
-    priceMonthly: "+$1/mo",
-    priceYearly: "+$10/yr",
-  },
-  {
-    key: "storage",
-    name: "Larger Storage",
-    description: "Extra 1 TB of cloud save",
-    priceMonthly: "+$2/mo",
-    priceYearly: "+$20/yr",
-  },
-  {
-    key: "customize",
-    name: "Customizable Profile",
-    description: "Custom theme on your profile",
-    priceMonthly: "+$2/mo",
-    priceYearly: "+$20/yr",
-  },
-];
-
-function StepThree({ yearly }) {
-  const [isActive, setIsActive] = useState([]);
+function StepThree({ addOns, yearly, isAddOn, setIsAddOn }) {
+  // const [isAddOn, setIsActive] = useState([]);
 
   const toggleAddOn = (addOn) => {
-    setIsActive((prev) =>
+    setIsAddOn((prev) =>
       prev.includes(addOn)
         ? prev.filter((item) => item !== addOn)
         : [...prev, addOn]
@@ -47,20 +23,20 @@ function StepThree({ yearly }) {
           <button
             key={addon.key}
             className={`add-on ${addon.key} ${
-              isActive.includes(addon.key) ? "active" : ""
+              isAddOn.includes(addon.key) ? "active" : ""
             }`}
             onClick={() => toggleAddOn(addon.key)}
             type="button"
           >
             <label
               className={`checkbox-label ${
-                isActive.includes(addon.key) ? "active" : ""
+                isAddOn.includes(addon.key) ? "active" : ""
               }`}
               onChange={() => toggleAddOn(addon.key)}
             >
               <input
                 type="checkbox"
-                checked={isActive.includes(addon.key)}
+                checked={isAddOn.includes(addon.key)}
                 readOnly
               />
             </label>
